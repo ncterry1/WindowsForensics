@@ -34,25 +34,106 @@ rely on—helper routines you don’t intend users to call directly, but which k
 functions DRY, robust, and consistent.**
 --------------------------------------
 #WindowsForensics\  
-  ├── WindowsForensics.psd1       # Module manifest  
-  ├── WindowsForensics.psm1       # Module entry script  
-  ├── PublicFunctions\            # Publicly exported functions  
-  │     ├── Get-VolatileData.ps1  
-  │     ├── Get-NonVolatileData.ps1  
-  │     ├── Invoke-LogAnalysis.ps1  
-  │     ├── Test-Persistence.ps1  
-  │     ├── Get-NetworkActivity.ps1  
-  │     ├── ...  
-  │     ├── ...  
-  │     ├── ...  
-  ├── Private\                      #Internal helper functions  
-  │     ├── Get-RegistryHive.ps1  
-  │     ├── Get-PrefetchFiles.ps1  
-  │     ├── Invoke-HashCheck.ps1  
-  │     ├── Invoke-ExternalTool.ps1  
-  │     ├── ...  
-  │     ├── ...  
-  │     ├── ...  
-  └── Tools\                      # External binaries or scripts (C#/Python DLLs)  
-        └── ForensicHelpers.dll   # (optional placeholder)  
+      ├── WindowsForensics.psd1       # Module manifest  
+      ├── WindowsForensics.psm1       # Module entry script  
+      ├── PublicFunctions\            # Publicly exported functions  
+      │     ├── Get-VolatileData.ps1  
+      │     ├── Get-NonVolatileData.ps1  
+      │     ├── Invoke-LogAnalysis.ps1  
+      │     ├── Test-Persistence.ps1  
+      │     ├── Get-NetworkActivity.ps1  
+      │     ├── ...  
+      │     ├── ...  
+      │     ├── ...  
+      ├── Private\                      #Internal helper functions  
+      │     ├── Get-RegistryHive.ps1  
+      │     ├── Get-PrefetchFiles.ps1  
+      │     ├── Invoke-HashCheck.ps1  
+      │     ├── Invoke-ExternalTool.ps1  
+      │     ├── ...  
+      │     ├── ...  
+      │     ├── ...  
+      └── Tools\                      # External binaries or scripts (C#/Python DLLs)  
+            └── ForensicHelpers.dll   # (optional placeholder)  
+
+
+Here's a structured checklist to begin a Windows forensic scan, emphasizing key system areas, artifacts, and actions:
+
+****Windows Forensics Checklist****  
+***1. Preparation Phase***
+ 
+     *- Document System Details (Hostname, OS version, IP/MAC addresses)  
+     *- Establish Chain of Custody  
+     *- Ensure Time Zone and Clock Synchronization (Record current system time)  
+     *- Create Forensic Image (use FTK Imager, dd, or equivalent tool)  
+     *- Verify Image Integrity (hash verification - MD5/SHA-256)  
+
+***2. Volatile Data Collection (Memory Forensics)***
+ 
+     *- RAM Acquisition (Volatility, DumpIt, FTK Imager)  
+     *- Active Processes (tasklist, pslist)  
+     *- Open Network Connections (netstat -ano, TCPView)   
+     *- Current Logged-In Users (quser, logonsessions)  
+     *- Clipboard Data Capture (optional, depending on case)  
+
+***3. Non-Volatile Data Collection (Disk Analysis)***
+
+      **System Artifacts**  
+       *- Registry Hives (SYSTEM, SECURITY, SOFTWARE, SAM, NTUSER.DAT)*  
+       *- Prefetch Files (C:\Windows\Prefetch)*  
+       *- Scheduled Tasks (schtasks, Task Scheduler Library)*  
+       *- Services (services.msc, sc query)*  
+      
+      **User Activity**  
+       *- Recent Files (C:\Users\<User>\AppData\Roaming\Microsoft\Windows\Recent)*  
+       *- Jump Lists (%AppData%\Microsoft\Windows\Recent\AutomaticDestinations)*  
+       *- Browser History (Edge, Chrome, Firefox artifacts)*  
+       *- Downloads Folder (C:\Users\<User>\Downloads)*  
+      
+      **File System Analysis**  
+       *- Analyze NTFS timestamps (MACE - Modified, Accessed, Created, Entry Modified)*  
+       *- Identify Hidden or Deleted Files (Recycle Bin, file carving)*  
+       *- Check Alternate Data Streams (ADS)*  
+       *- Identify and document encrypted or password-protected files*  
+
+***4. Log Analysis***  
+
+     *- Event Logs (Application, Security, System) (Event Viewer, wevtutil) 
+     *- PowerShell logs (%SystemRoot%\System32\winevt\Logs\Windows PowerShell.evtx)  
+     *- Firewall Logs (Windows Defender Firewall)  
+     *- Authentication Logs (Security.evtx, failed/successful logins)  
+
+***5. Malware and Persistence Analysis***  
+
+     *- Autorun Locations (Autoruns, registry run keys)  
+     *- Known Startup Locations (Startup folders, Registry keys)  
+     *- Examine Scheduled Tasks for persistence  
+     *- Malware scans (Defender, Malwarebytes, custom indicators)  
+
+***6. Network Activity & Connections***  
+
+     *- DNS Cache (ipconfig /displaydns)  
+     *- ARP Cache (arp -a)  
+     *- Packet Captures (Wireshark, pktmon logs)  
+     *- Network Shares and Mounted Drives (net use)  
+
+***7. Advanced Analysis (if applicable)***  
+
+     *- Shellbags Analysis (Registry Explorer, Shellbags Explorer)  
+     *- Volume Shadow Copies Analysis (vssadmin list shadows, access via forensic tools)  
+     *- UserAssist keys analysis (Registry artifacts)  
+
+***8. Documentation and Reporting***  
+
+     *- Maintain accurate logs and documentation for every step performed  
+     *- Capture screenshots of relevant findings and evidences  
+     *- Prepare concise technical report highlighting key artifacts, analysis, timeline reconstruction, and conclusions.  
+
+This structured checklist provides a systematic starting point for Windows forensic investigations, covering critical system areas, artifacts, and procedures. Adjustments should be made based on the specific scope, objectives, and context of the investigation.
+
+
+
+
+
+
 
