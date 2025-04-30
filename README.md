@@ -1,12 +1,10 @@
 # WindowsForensics
 # Windows Forensics Module
-<#----------------------------------------------
      We’ve laid out a full PowerShell module scaffolding—manifest, entry script, directory structure, 
 and one example function—to collect each category of forensic data. We can add your Python/C# helpers 
 in the Tools folder and call them via the Invoke-ExternalTool helper in Private. From here, create 
 similar PublicFunctions for non-volatile artifacts, logs, persistence checks, and network activity. 
-------------------------------------------------#>
-<#----------------------------------------------
+
 -----Best Practices for Your Private Folder-----
 ------------------------------------------------
 1) Naming: Prefix helper functions with nouns 
@@ -28,9 +26,9 @@ growing beyond ~50 lines, split it further (e.g. separate loading vs. parsing vs
 By keeping these helpers well-structured and well-documented, our public 
 cmdlets become simple orchestrators—just “call this, call that, package 
 results”—while the real heavy lifting stays hidden and maintainable.
-------------------------------------------------#>
-<#-----------------Folder Structure-------------
-     The Private\ folder is where you put all of the internal “plumbing” that your public cmdlets 
+
+-----------------Folder Structure-------------
+The Private\ folder is where you put all of the internal “plumbing” that your public cmdlets 
 rely on—helper routines you don’t intend users to call directly, but which keep your public 
 functions DRY, robust, and consistent.
 --------------------------------------
@@ -56,4 +54,4 @@ WindowsForensics\
   │     ├── ...
   └── Tools\                      # External binaries or scripts (C#/Python DLLs)
         └── ForensicHelpers.dll   # (optional placeholder)
- ---------------------------------------------------#>
+
