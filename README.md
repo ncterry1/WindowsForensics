@@ -29,9 +29,6 @@ results”—while the real heavy lifting stays hidden and maintainable.
 
 
 Folder Structure:   
-The Private\ folder is where you put all of the internal “plumbing” that your public cmdlets 
-rely on—helper routines you don’t intend users to call directly, but which keep your public 
-functions DRY, robust, and consistent.**
 --------------------------------------
 \WindowsForensicsModule\  
 ├── WindowsForensicsModule.psm1           # Root module file (dot-sources all functions)  
@@ -41,19 +38,19 @@ functions DRY, robust, and consistent.**
 ├── RunWindowsForensicsProgram.ps1        # Main CLI entry point  
 ├── \Functions\                            # All user-facing forensic commands  
 │   ├── \EventLogs\  
-│   │    ├───── Get-SystemLogs.ps1  
-│   │    └───── Analyze-SecurityEvents.ps1  
+│   │    ├───── Get-File1.ps1  
+│   │    └───── Get-File2.ps1  
 │   ├── \RegistryAnalysis\  
-│   │    ├───── Export-RegistryHives.ps1  
-│   │    └───── Compare-RegistrySnapshots.ps1  
+│   │    ├───── Get-File1.ps1  
+│   │    └───── Get-File2.ps1  
 │   └── \NetworkAnalysis\  
-│        ├───── Capture-NetworkTraffic.ps1  
-│        └───── Analyze-NetworkPackets.ps1  
+│        ├───── Get-File1.ps1  
+│   │    └───── Get-File2.ps1 
 ├── \Menus\                                # Interactive menu scripts  
 │    ├───── MainMenu.ps1  
-│    ├───── EventLogMenu.ps1  
-│    ├───── RegistryMenu.ps1  
-│    └───── NetworkMenu.ps1  
+│    ├───── SubMenu1.ps1  
+│    ├───── SubMenu2.ps1  
+│    └───── SubMenu3.ps1  
 └── \Utils\                                # Private/internal helpers (not exported)  
        ├───── Write-Log.ps1  
        └───── ScreenHelpers.ps1  
