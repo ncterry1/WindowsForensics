@@ -1,13 +1,17 @@
 Import-Module WindowsForensicsModule -Force
 
 function Display-MainMenu {
-    Write-Host "=========================================="
-    Write-Host "===     Windows Forensics Program      ==="
-    Write-Host "=========================================="
-    Write-Host " 1) Event Log Analysis"
-    Write-Host " 2) Registry Analysis"
-    Write-Host " 3) Network Analysis"
-    Write-Host " h) Help | q) Quit"
+    Write-Host("
+|======================================================================|
+|==================--- Windows Forensics Program ---===================|
+|======================================================================|") # END WRITE-HOST
+    #
+    Write-Host("`n Selections:
+------------------------------------------------------------------------`n")
+    Write-Host -ForegroundColor Yellow " 1) Event Log Analysis"
+    Write-Host -ForegroundColor Yellow " 2) Registry Analysis"
+    Write-Host -ForegroundColor Yellow " 3) Network Analysis"
+    Write-Host -ForegroundColor Yellow " h) Help | q) Quit"
 }
 
 do {
