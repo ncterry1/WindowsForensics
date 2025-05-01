@@ -34,7 +34,12 @@
 # If the Copy-Item above does not work, such as user has no admin privs, it cant import then.
 # Import uses the instructions on that local "WindowsForensicsModule.psm1"
 #>
-
+#------------------------------------
+function Refresh-Screen {
+    Write-Host("`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n") # The screen can leave residual text. This overwrites before clear
+        Clear-Host
+}# End function Refresh-Screen
+#------------------------------------
 Import-Module WindowsForensicsModule -Force
 
 function Display-MainMenu {
@@ -45,9 +50,15 @@ function Display-MainMenu {
     #
     Write-Host("`n Selections:
 -----------------------------------------------------------------------`n")
-    Write-Host -ForegroundColor Yellow " 1) Event Log Analysis"
-    Write-Host -ForegroundColor Yellow " 2) Registry Analysis"
-    Write-Host -ForegroundColor Yellow " 3) Network Analysis"
+    Write-Host -ForegroundColor Yellow " 1. Preparation Phase"
+    Write-Host -ForegroundColor Yellow " 2. Volatile Data Collection (Memory Forensics)"
+    Write-Host -ForegroundColor Yellow " 3. Non-Volatile Data Collection (Disk Analysis)s"
+    Write-Host -ForegroundColor Yellow " 4. Log Analysis"
+    Write-Host -ForegroundColor Yellow " 5. Malware and Persistence Analysis"
+    Write-Host -ForegroundColor Yellow " 6. Network Activity & Connections"
+    Write-Host -ForegroundColor Yellow " 7. Advanced Analysis (if applicable)"
+    Write-Host -ForegroundColor Yellow " 8. Documentation and Reporting"
+
     #
 
     Write-Host("------------------------------------------------------------------------")
@@ -67,12 +78,10 @@ $Global:quit = ""   # Var allows for a full session quit from sub menus.
 do
 {
     If ($Global:quit -eq "quit") {break}
-    Write-Host("`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n") # The screen can leave residual text. This overwrites before clear
-    Clear-Host        # Clear terminal 
+    Refresh-Screen # Sub-Function
     Display-MainMenu      # Call local function. Print menu to screen
     $choice = Read-Host "`nEnter Choice"  #Ask user for menu choice
-    Write-Host("`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n") # The screen can leave residual text. This overwrites before clear
-    Clear-Host
+    Refresh-Screen # Sub-Function
     $choice = $choice -replace '\s', ''   #In case user enters spaces
     $choice = $choice.ToLower()           #In case user uses any capitol letters.
     #--------------------------------------------------
@@ -82,14 +91,16 @@ do
     #--------------------------------------------------
     switch ($choice)  # If menu options are chosen correctly.
     {
-        # Option 1 - System\Domain Information-------------
+        # Option 1. Preparation Phase
         '1' 
         {
-            Write-Host "1) You chose To view the System\Domain Information"
+            Write-Host "1) Preparation Phase"
             #.\Menu\1_GPOsDomainMenu.ps1    # Execute GPO Search Menu script.
+            <#
+            
+            #>
             If ($Global:quit -eq "quit") {break}
             
-
         }#END option 1-------------------------------------
         #--------------------------------------------------
         #--------------------------------------------------
@@ -98,15 +109,215 @@ do
 # Write-Host ==> Pressed left for formatting; Leave on the left.
 Write-Host -ForegroundColor Yellow ("
 ----------
-1) System\Domain Information
-----------
-Several options that gather basic information such as the Domain,  
-Domain Controller, and network tests related to the System and 
-Domain.") # END WRITE-HOST
+1h) Preparation Phase
+        1) Document System Details (Hostname, OS version, IP/MAC addresses)
+        2) Establish Chain of Custody
+        3) Ensure Time Zone and Clock Synchronization (Record current system time)
+        4) Create Forensic Image (use FTK Imager, dd, or equivalent tool)
+        5) Verify Image Integrity (hash verification - MD5/SHA-256") # END WRITE-HOST
 
             Pause
 
         } # End 1h-----------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        # Option 2. Volatile Data Collection (Memory Forensics)
+        '2' 
+        {
+            Write-Host "2. Volatile Data Collection (Memory Forensics)"
+
+            If ($Global:quit -eq "quit") {break}
+            
+        }#END option 2-------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        '2h' # Help/Information for 2
+        {
+# Write-Host ==> Pressed left for formatting; Leave on the left.
+Write-Host -ForegroundColor Yellow ("
+----------
+2. Volatile Data Collection (Memory Forensics)
+        1) RAM Acquisition (Volatility, DumpIt, FTK Imager)
+        2) Active Processes (tasklist, pslist)
+        3) Open Network Connections (netstat -ano, TCPView)
+        4) Current Logged-In Users (quser, logonsessions)
+        5) Clipboard Data Capture (optional, depending on case)") # END WRITE-HOST
+
+            Pause
+
+        } # End 2h-----------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        # Option 3. Non-Volatile Data Collection (Disk Analysis) 
+        '3' 
+        {
+            Write-Host "3. Non-Volatile Data Collection (Disk Analysis)"
+
+            If ($Global:quit -eq "quit") {break}
+            
+        }#END option 3-------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        '3h' # Help/Information for 3
+        {
+# Write-Host ==> Pressed left for formatting; Leave on the left.
+Write-Host -ForegroundColor Yellow ("
+----------
+3h. Non-Volatile Data Collection (Disk Analysis)
+        System Artifacts
+            * Registry Hives (SYSTEM, SECURITY, SOFTWARE, SAM, NTUSER.DAT)
+            * Prefetch Files (C:\Windows\Prefetch)
+            * Scheduled Tasks (schtasks, Task Scheduler Library)
+            * Services (services.msc, sc query)
+        User Activity
+            * Recent Files (C:\Users\<User>\AppData\Roaming\Microsoft\Windows\Recent)
+            * Jump Lists (%AppData%\Microsoft\Windows\Recent\AutomaticDestinations)
+            * Browser History (Edge, Chrome, Firefox artifacts)
+            * Downloads Folder (C:\Users\<User>\Downloads)
+        File System Analysis
+            * Analyze NTFS timestamps (MACE - Modified, Accessed, Created, Entry Modified)
+            * Identify Hidden or Deleted Files (Recycle Bin, file carving)
+            * Check Alternate Data Streams (ADS)
+            * Identify and document encrypted or password-protected files") # END WRITE-HOST
+
+            Pause
+
+        } # End 3h-----------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        # Option 4. Log Analysis
+        '4' 
+        {
+            Write-Host "4. Log Analysis"
+
+            If ($Global:quit -eq "quit") {break}
+            
+        }#END option 4-------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        '4h' # Help/Information for 4
+        {
+# Write-Host ==> Pressed left for formatting; Leave on the left.
+Write-Host -ForegroundColor Yellow ("
+----------
+4h. Log Analysis 
+        * Event Logs (Application, Security, System) (Event Viewer, wevtutil)
+        * PowerShell logs (%SystemRoot%\System32\winevt\Logs\Windows PowerShell.evtx)
+        * Firewall Logs (Windows Defender Firewall)
+        * Authentication Logs (Security.evtx, failed/successful logins)") # END WRITE-HOST
+
+            Pause
+
+        } # End 4h-----------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        # Option 5.
+        '5' 
+        {
+            Write-Host "5. Malware and Persistence Analysis "
+
+            If ($Global:quit -eq "quit") {break}
+            
+        }#END option 5-------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        '5h' # Help/Information for 5
+        {
+# Write-Host ==> Pressed left for formatting; Leave on the left.
+Write-Host -ForegroundColor Yellow ("
+----------
+5h. Malware and Persistence Analysis 
+        * Autorun Locations (Autoruns, registry run keys)
+        * Known Startup Locations (Startup folders, Registry keys)
+        * Examine Scheduled Tasks for persistence
+        * Malware scans (Defender, Malwarebytes, custom indicators)") # END WRITE-HOST
+
+            Pause
+
+        } # End 5h-----------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        # Option 6. Network Activity & Connections
+        '6' 
+        {
+            Write-Host "6. Network Activity & Connections "
+
+            If ($Global:quit -eq "quit") {break}
+            
+        }#END option 6-------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        '6h' # Help/Information for 6
+        {
+# Write-Host ==> Pressed left for formatting; Leave on the left.
+Write-Host -ForegroundColor Yellow ("
+----------
+6h. Network Activity & Connections 
+        * DNS Cache (ipconfig /displaydns)
+        * ARP Cache (arp -a)
+        * Packet Captures (Wireshark, pktmon logs)
+        * Network Shares and Mounted Drives (net use)") # END WRITE-HOST
+
+            Pause
+
+        } # End 6h-----------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        # Option 7. Advanced Analysis (if applicable)
+        '7' 
+        {
+            Write-Host "7. Advanced Analysis (if applicable)"
+
+            If ($Global:quit -eq "quit") {break}
+            
+        }#END option 7-------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        '7h' # Help/Information for 7
+        {
+# Write-Host ==> Pressed left for formatting; Leave on the left.
+Write-Host -ForegroundColor Yellow ("
+----------
+7h. Advanced Analysis (if applicable)
+        * Shellbags Analysis (Registry Explorer, Shellbags Explorer)
+        * Volume Shadow Copies Analysis (vssadmin list shadows, access via forensic tools)
+        * UserAssist keys analysis (Registry artifacts)") # END WRITE-HOST
+
+            Pause
+
+        } # End 7h-----------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        # Option 8. Documentation and Reporting
+        '8' 
+        {
+            Write-Host "8. Documentation and Reporting"
+
+            If ($Global:quit -eq "quit") {break}
+            
+        }#END option 8-------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
+        '8h' # Help/Information for 8
+        {
+# Write-Host ==> Pressed left for formatting; Leave on the left.
+Write-Host -ForegroundColor Yellow ("
+----------
+8. Documentation and Reporting
+        * Maintain accurate logs and documentation for every step performed
+        * Capture screenshots of relevant findings and evidences
+        * Prepare concise technical report highlighting key artifacts, analysis, timeline reconstruction, and conclusions.") # END WRITE-HOST
+
+            Pause
+
+        } # End 8h-----------------------------------------
         #--------------------------------------------------
         #--------------------------------------------------
         #--------------------------------------------------
@@ -118,8 +329,7 @@ Domain.") # END WRITE-HOST
             $functionList = Get-ChildItem "$functionPath\Functions\" -Force -Name
             do {
               $pick, $choiceName = ""
-              Write-Host("`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n`n") # Terminal leaves residual text. This overwrites before clear
-              Clear-Host
+              Refresh-Screen # Sub-Function
 
 
               do {
