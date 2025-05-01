@@ -33,28 +33,31 @@ The Private\ folder is where you put all of the internal “plumbing” that you
 rely on—helper routines you don’t intend users to call directly, but which keep your public 
 functions DRY, robust, and consistent.**
 --------------------------------------
-#WindowsForensics\  
-      ├── WindowsForensics.psd1       # Module manifest  
-      ├── WindowsForensics.psm1       # Module entry script  
-      ├── PublicFunctions\            # Publicly exported functions  
-      │     ├── Get-VolatileData.ps1  
-      │     ├── Get-NonVolatileData.ps1  
-      │     ├── Invoke-LogAnalysis.ps1  
-      │     ├── Test-Persistence.ps1  
-      │     ├── Get-NetworkActivity.ps1  
-      │     ├── ...  
-      │     ├── ...  
-      │     ├── ...  
-      ├── Private\                      #Internal helper functions  
-      │     ├── Get-RegistryHive.ps1  
-      │     ├── Get-PrefetchFiles.ps1  
-      │     ├── Invoke-HashCheck.ps1  
-      │     ├── Invoke-ExternalTool.ps1  
-      │     ├── ...  
-      │     ├── ...  
-      │     ├── ...  
-      └── Tools\                      # External binaries or scripts (C#/Python DLLs)  
-            └── ForensicHelpers.dll   # (optional placeholder)  
+WindowsForensicsModule/  
+├── WindowsForensicsModule.psm1           # Root module file (dot-sources all functions)  
+├── InstallWindowsForensicsModule.ps1     # Installation script (copies to PSModulePath, imports)  
+├── WindowsForensicsModule.psd1           # Manifest (versioning, exported commands, dependencies)  
+├── ReadMe.md                             # Basic usage & examples  
+├── RunWindowsForensicsProgram.ps1        # Main CLI entry point  
+├── Functions/                            # All user-facing forensic commands  
+│   ├── EventLogs/  
+│   │   ├── Get-SystemLogs.ps1  
+│   │   └── Analyze-SecurityEvents.ps1  
+│   ├── RegistryAnalysis/  
+│   │   ├── Export-RegistryHives.ps1  
+│   │   └── Compare-RegistrySnapshots.ps1  
+│   └── NetworkAnalysis/  
+│       ├── Capture-NetworkTraffic.ps1  
+│       └── Analyze-NetworkPackets.ps1  
+├── Menus/                                # Interactive menu scripts  
+│   ├── MainMenu.ps1  
+│   ├── EventLogMenu.ps1  
+│   ├── RegistryMenu.ps1  
+│   └── NetworkMenu.ps1  
+└── Utils/                                # Private/internal helpers (not exported)  
+    ├── Write-Log.ps1  
+    └── ScreenHelpers.ps1  
+
 
 
 Here's a structured checklist to begin a Windows forensic scan, emphasizing key system areas, artifacts, and actions:
