@@ -56,7 +56,7 @@ Import-Module ActiveDirectory   #Remote Server Administration Tools must have be
 # The default location will be in: C:\Program Files\WindowsPowerShell\Modules\WindowsForensicsModule\
 # This .psm1 should be in the WindowsForensicsModule directory.
 # Used next to import the sub-functions
-$functionPath = $PSScriptRoot + "\functions\"
+$functionPath = $PSScriptRoot + "\Functions\"
 
 
 # Get a list of all the function file names
