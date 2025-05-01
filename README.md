@@ -41,22 +41,22 @@ WindowsForensicsModule/
 ├── RunWindowsForensicsProgram.ps1        # Main CLI entry point  
 ├── Functions/                            # All user-facing forensic commands  
 │   ├── EventLogs/  
-│   │   ├── Get-SystemLogs.ps1  
-│   │   └── Analyze-SecurityEvents.ps1  
+│   │      ├── Get-SystemLogs.ps1  
+│   │      └── Analyze-SecurityEvents.ps1  
 │   ├── RegistryAnalysis/  
-│   │   ├── Export-RegistryHives.ps1  
-│   │   └── Compare-RegistrySnapshots.ps1  
+│   │      ├── Export-RegistryHives.ps1  
+│   │      └── Compare-RegistrySnapshots.ps1  
 │   └── NetworkAnalysis/  
-│       ├── Capture-NetworkTraffic.ps1  
-│       └── Analyze-NetworkPackets.ps1  
+│          ├── Capture-NetworkTraffic.ps1  
+│          └── Analyze-NetworkPackets.ps1  
 ├── Menus/                                # Interactive menu scripts  
-│   ├── MainMenu.ps1  
-│   ├── EventLogMenu.ps1  
-│   ├── RegistryMenu.ps1  
-│   └── NetworkMenu.ps1  
+│      ├── MainMenu.ps1  
+│      ├── EventLogMenu.ps1  
+│      ├── RegistryMenu.ps1  
+│      └── NetworkMenu.ps1  
 └── Utils/                                # Private/internal helpers (not exported)  
-    ├── Write-Log.ps1  
-    └── ScreenHelpers.ps1  
+       ├── Write-Log.ps1  
+       └── ScreenHelpers.ps1  
 
 
 
