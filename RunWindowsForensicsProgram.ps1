@@ -63,6 +63,7 @@ function Display-MainMenu {
 # Continuing do loop unless user quits
 # Other menus/functions will resort back here when they are completed.
 $Global:quit = ""   # Var allows for a full session quit from sub menus.
+#--------------------------------------------------
 do
 {
     If ($Global:quit -eq "quit") {break}
@@ -74,7 +75,11 @@ do
     Clear-Host
     $choice = $choice -replace '\s', ''   #In case user enters spaces
     $choice = $choice.ToLower()           #In case user uses any capitol letters.
-
+    #--------------------------------------------------
+    #--------------------------------------------------
+    #--------------------------------------------------
+    #--------------------------------------------------
+    #--------------------------------------------------
     switch ($choice)  # If menu options are chosen correctly.
     {
         # Option 1 - System\Domain Information-------------
@@ -86,6 +91,7 @@ do
             
 
         }#END option 1-------------------------------------
+        #--------------------------------------------------
         #--------------------------------------------------
         '1h' # Help/Information for 1
         {
@@ -102,113 +108,7 @@ Domain.") # END WRITE-HOST
 
         } # End 1h-----------------------------------------
         #--------------------------------------------------
-        # Option 2 - Current GPOs--------------------------
-        '2' 
-        {
-            Write-Host "2) "
-            If ($Global:quit -eq "quit") {break}
-
-
-        }#END option 2-----------------------------------------------
         #--------------------------------------------------
-        '2h' # Help/Information for 2
-        {
-# Write-Host ==> Pressed left for formatting; Leave on the left.         
-Write-Host -ForegroundColor Yellow ("
-----------
-2) Information on 
-----------") # END WRITE-HOST
-
-            Pause
-        } # End 2h-----------------------------------------
-        #--------------------------------------------------
-        # Option 3 
-        '3' 
-        {
-
-            If ($Global:quit -eq "quit") {break}
-
-        }#END option 3------------------------------------- 
-        #--------------------------------------------------
-        '3h' # Help/Information for 3
-        {
-# Write-Host ==> Pressed left for formatting; Leave on the left.
-Write-Host -ForegroundColor Yellow ("
-----------
-3) 
-----------n") # END WRITE-HOST
-
-            Pause
-        } # End 3h-----------------------------------------
-        #--------------------------------------------------
-        # Option 4
-        '4' 
-        {
-            Write-Host ("")
-            If ($Global:quit -eq "quit") {break}
-
-        }#END option 4-------------------------------------   
-        #--------------------------------------------------
-        '4h' # Help/Information for 4
-        {
-# Write-Host ==> Pressed left for formatting; Leave on the left.
-Write-Host -ForegroundColor Yellow ("
-----------
-4) ") # END WRITE-HOST
-
-            Pause
-        } # End 4h   -----------------------------------------  
-        #--------------------------------------------------
-        # Option 5 - Create New GPOs-----------------------
-        '5' 
-        {
-            If ($Global:quit -eq "quit") {break}
-
-        }#END option 5-------------------------------------
-        #--------------------------------------------------
-        '5h' # Help/Information for 5
-        {
-# Write-Host ==> Pressed left for formatting; Leave on the left.
-Write-Host -ForegroundColor Yellow ("
-----------
-5) ") # END WRITE-HOST
-
-            Pause
-        } # End 5h-----------------------------------------
-        #--------------------------------------------------
-        # Option 6 
-        '6' 
-        {
-            If ($Global:quit -eq "quit") {break}
-
-        }#END option 6-------------------------------------
-        #--------------------------------------------------
-        '6h' # Help/Information for 6
-        {
-# Write-Host ==> Pressed left for formatting Leave on the left.
-Write-Host -ForegroundColor Yellow ("
-----------
-6) ") # END WRITE-HOST
-
-            Pause
-        } # End 6h-----------------------------------------
-        #--------------------------------------------------
-        # Option 7 
-        '7' 
-        {
-            If ($Global:quit -eq "quit") {break}
-
-        }#END option 7-------------------------------------
-        #--------------------------------------------------
-        '7h' # Help/Information for 7
-        {
-# Write-Host ==> Pressed left for formatting; Leave on the left.
-Write-Host -ForegroundColor Yellow ("
-----------
-7)  ") # END WRITE-HOST
-
-            Pause
-        } # End 7h-----------------------------------------
         #--------------------------------------------------
         # Option 8 - View all functions created for WindowsForensicsModule-----------------------
         '8' 
@@ -295,14 +195,16 @@ Write-Host -ForegroundColor Yellow ("
 README - WindowsForensicsModule and RunWindowsForensicsProgram Summary
 -------------------------------------------------
 
-  The 'WindowsForensicsModule' was built to accomplish extensic Windows Forensics gathering.
+  The 'WindowsForensicsModule' was built to accomplish 
+  extensic Windows Forensics gathering.
 
     > Get-Help <function name> -full
 
 
-  Step1: 
-  Install the WindowsForensicsModule
-  Once downloaded, or cloned, then move to the downloaded `"WindowsForensicsModule`" directory.
+  Step1: Install the WindowsForensicsModule
+  Once downloaded, or cloned, then move to the downloaded 
+  `"WindowsForensicsModule`" directory.
+  ----------------
   From PowerShell:    
   	  > .\InstallWindowsForensicsModule.ps1
   
@@ -397,7 +299,6 @@ README - WindowsForensicsModule and RunWindowsForensicsProgram Summary
 
 
 
-
   Now all 'WindowsForensicsModule' functions will be active.
   It is still recommended to operate 'WindowsForensicsModule' through the:
 
@@ -421,18 +322,26 @@ README - WindowsForensicsModule and RunWindowsForensicsProgram Summary
   Once you have removed the directory, then remove the module from the memory cache: 
 
     > Remove-Module -Name `"WindowsForensicsModule`"
+    
+    -----------------------------------------------
  ") # END WRITE-HOST
+ #--------------------------------------------------
 
             Pause
-        } # End readme-----------------------------------------
+        } # End readme-------------------------------------
         #--------------------------------------------------
-        #------------------------  
+        #--------------------------------------------------
+        #--------------------------------------------------
+        #--------------------------------------------------
         'quit' 
         {
             $Global:quit = "quit"
             $choice = "q"
+        #--------------------------------------------------
         } # End quit       
+    #--------------------------------------------------
     }# END Switch
+    #--------------------------------------------------
 
     Display-MainMenu #Refresh main menu
 
